@@ -6,13 +6,15 @@ namespace WebAPI_DotNetMVC.DBContext
 {
     public class DemoDBContext: DbContext
     {
-        public DemoDBContext() : base("DemoDBContextNew")
+        public DemoDBContext() : base("DemoDBContext")
         {
         }
 
         public DbSet<Student> Students { get; set; }
 
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+
+        //public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

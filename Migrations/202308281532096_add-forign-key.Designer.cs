@@ -7,13 +7,13 @@ namespace WebAPI_DotNetMVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class altercolumnlength : IMigrationMetadata
+    public sealed partial class addforignkey : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(altercolumnlength));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addforignkey));
         
         string IMigrationMetadata.Id
         {
-            get { return "202308270352360_alter-column-length"; }
+            get { return "202308281532096_add-forign-key"; }
         }
         
         string IMigrationMetadata.Source

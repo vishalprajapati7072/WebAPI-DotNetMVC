@@ -169,24 +169,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202308260315358_initial.cs" />
-    <Compile Include="Migrations\202308260315358_initial.designer.cs">
-      <DependentUpon>202308260315358_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202308281511053_initial.cs" />
+    <Compile Include="Migrations\202308281511053_initial.designer.cs">
+      <DependentUpon>202308281511053_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202308270350049_alter-column.cs" />
-    <Compile Include="Migrations\202308270350049_alter-column.designer.cs">
-      <DependentUpon>202308270350049_alter-column.cs</DependentUpon>
+    <Compile Include="Migrations\202308281515481_update-table-student.cs" />
+    <Compile Include="Migrations\202308281515481_update-table-student.designer.cs">
+      <DependentUpon>202308281515481_update-table-student.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202308270352360_alter-column-length.cs" />
-    <Compile Include="Migrations\202308270352360_alter-column-length.designer.cs">
-      <DependentUpon>202308270352360_alter-column-length.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202308270355532_add-employee-table.cs" />
-    <Compile Include="Migrations\202308270355532_add-employee-table.designer.cs">
-      <DependentUpon>202308270355532_add-employee-table.cs</DependentUpon>
+    <Compile Include="Migrations\202308281532096_add-forign-key.cs" />
+    <Compile Include="Migrations\202308281532096_add-forign-key.designer.cs">
+      <DependentUpon>202308281532096_add-forign-key.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -331,17 +327,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202308260315358_initial.resx">
-      <DependentUpon>202308260315358_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202308281511053_initial.resx">
+      <DependentUpon>202308281511053_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202308270350049_alter-column.resx">
-      <DependentUpon>202308270350049_alter-column.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202308281515481_update-table-student.resx">
+      <DependentUpon>202308281515481_update-table-student.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202308270352360_alter-column-length.resx">
-      <DependentUpon>202308270352360_alter-column-length.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202308270355532_add-employee-table.resx">
-      <DependentUpon>202308270355532_add-employee-table.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202308281532096_add-forign-key.resx">
+      <DependentUpon>202308281532096_add-forign-key.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

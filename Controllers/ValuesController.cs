@@ -1,35 +1,47 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
-
+using WebAPI_DotNetMVC.DBContext;
+using WebAPI_DotNetMVC.Model;
 
 namespace WebAPI_DotNetMVC.Controllers
 {
-    [Authorize]
     public class ValuesController : ApiController
     {
-        [ActionName("GetValues")]
-        // GET api/values
-        public IEnumerable<string> Get()
+        public readonly DemoDBContext demoDBContext;
+        public ValuesController()
         {
-            return new string[] { "value1", "value2" };
+            this.demoDBContext = new DemoDBContext();
         }
 
-        [ActionName("GetValues1")]
-        [AllowAnonymous]
-        // GET api/values/5
-        public string Get(int id)
-        {
-            //db operations 
 
-            return "value";
+        [ActionName("GetStudents")]
+        public IEnumerable<Student> Get()
+        {
+            return this.demoDBContext.Students.ToList();
         }
 
-        [AllowAnonymous]       
-        [HttpGet]
-        // GET api/values/5
-        public string Get(string id)
+        [ActionName("GetStudentDetails")]
+        public async Task<Student> Get(int id)
         {
-            return "With Auth > value";
+            return await this.demoDBContext.Students.Where(x => x.Id == id).FirstAsync();
+        }
+
+        [ActionName("CreateStudent")]
+        [HttpPost]
+        public int Create(Student student)
+        {
+            Student existingRecord = this.demoDBContext.Students.Where(x => x.Id == student.Id).FirstOrDefault();
+
+            this.demoDBContext.Students.Add(student);
+
+            this.demoDBContext.Entry(existingRecord).CurrentValues.SetValues(student);
+
+            this.demoDBContext.SaveChanges();
+
+            return student.Id;
         }
 
         [ActionName("WithFloat")]

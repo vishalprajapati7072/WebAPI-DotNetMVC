@@ -1,13 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPI_DotNetMVC.Model
 {
     public class Student
     {
-        //[Key]
+        [Key]
         public int Id { get; set; }
-            
+
+        [Column("first_name", TypeName = "varchar")]
+        [StringLength(501)]
         public string FirstName { get; set; }
 
         [Column("last_name", TypeName = "varchar")]

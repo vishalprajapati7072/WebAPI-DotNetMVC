@@ -13,7 +13,7 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         FirstName = c.String(),
-                        LastName = c.String(),
+                        last_name = c.String(maxLength: 50, unicode: false),
                         Email = c.String(),
                     })
                 .PrimaryKey(t => t.Id);

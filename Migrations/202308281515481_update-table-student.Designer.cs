@@ -7,13 +7,13 @@ namespace WebAPI_DotNetMVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class altercolumn : IMigrationMetadata
+    public sealed partial class updatetablestudent : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(altercolumn));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updatetablestudent));
         
         string IMigrationMetadata.Id
         {
-            get { return "202308270350049_alter-column"; }
+            get { return "202308281515481_update-table-student"; }
         }
         
         string IMigrationMetadata.Source
