@@ -8,14 +8,13 @@ using WebAPI_DotNetMVC.Model;
 
 namespace WebAPI_DotNetMVC.Controllers
 {
-    public class ValuesController : ApiController
+    public class StudentController : ApiController
     {
         public readonly DemoDBContext demoDBContext;
-        public ValuesController()
+        public StudentController()
         {
             this.demoDBContext = new DemoDBContext();
         }
-
 
         [ActionName("GetStudents")]
         public IEnumerable<Student> Get()
@@ -33,11 +32,11 @@ namespace WebAPI_DotNetMVC.Controllers
         [HttpPost]
         public int Create(Student student)
         {
-            Student existingRecord = this.demoDBContext.Students.Where(x => x.Id == student.Id).FirstOrDefault();
+            //Student existingRecord = this.demoDBContext.Students.Where(x => x.Id == student.Id).FirstOrDefault();
 
             this.demoDBContext.Students.Add(student);
 
-            this.demoDBContext.Entry(existingRecord).CurrentValues.SetValues(student);
+           // this.demoDBContext.Entry(existingRecord).CurrentValues.SetValues(student);
 
             this.demoDBContext.SaveChanges();
 
