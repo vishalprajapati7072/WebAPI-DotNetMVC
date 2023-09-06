@@ -19,6 +19,6 @@ namespace WebAPI_DotNetMVC.Model
 
         public string Email { get; set; }
 
-        public ICollection<Address> Addresses { get; set; }
+        public ICollection<Address> Address { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using WebAPI_DotNetMVC.DBContext;
+using WebAPI_DotNetMVC.Filters;
 using WebAPI_DotNetMVC.Model;
 
 namespace WebAPI_DotNetMVC.Controllers
@@ -16,11 +17,22 @@ namespace WebAPI_DotNetMVC.Controllers
             this.demoDBContext = new DemoDBContext();
         }
 
+        //[CustomAuthFilter]
+        [Authorize]
+        [CustomAuthFilter]
         [ActionName("GetStudents")]
         public IEnumerable<Student> Get()
         {
             return this.demoDBContext.Students.ToList();
+
+            //var student = (from x in this.demoDBContext.Students
+            //               join ad in this.demoDBContext.Addresses on x.Id equals ad.Id
+            //               where x.Email == "nu@gmail.com"
+            //               orderby x.Email descending
+            //               select x);
+            //return a;
         }
+
 
         [ActionName("GetStudentDetails")]
         public async Task<Student> Get(int id)
@@ -36,7 +48,7 @@ namespace WebAPI_DotNetMVC.Controllers
 
             this.demoDBContext.Students.Add(student);
 
-           // this.demoDBContext.Entry(existingRecord).CurrentValues.SetValues(student);
+            // this.demoDBContext.Entry(existingRecord).CurrentValues.SetValues(student);
 
             this.demoDBContext.SaveChanges();
 
