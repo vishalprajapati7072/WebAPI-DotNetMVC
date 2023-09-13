@@ -14,7 +14,7 @@ namespace WebAPI_DotNetMVC.Controllers
         public readonly DemoDBContext demoDBContext;
         public StudentController()
         {
-            this.demoDBContext = new DemoDBContext();
+            demoDBContext = new DemoDBContext();
         }
 
         //[CustomAuthFilter]
@@ -23,7 +23,7 @@ namespace WebAPI_DotNetMVC.Controllers
         [ActionName("GetStudents")]
         public IEnumerable<Student> Get()
         {
-            return this.demoDBContext.Students.ToList();
+            return demoDBContext.Students.ToList();
 
             //var student = (from x in this.demoDBContext.Students
             //               join ad in this.demoDBContext.Addresses on x.Id equals ad.Id
@@ -37,7 +37,7 @@ namespace WebAPI_DotNetMVC.Controllers
         [ActionName("GetStudentDetails")]
         public async Task<Student> Get(int id)
         {
-            return await this.demoDBContext.Students.Where(x => x.Id == id).FirstAsync();
+            return await demoDBContext.Students.Where(x => x.Id == id).FirstAsync();
         }
 
         [ActionName("CreateStudent")]
@@ -46,11 +46,11 @@ namespace WebAPI_DotNetMVC.Controllers
         {
             //Student existingRecord = this.demoDBContext.Students.Where(x => x.Id == student.Id).FirstOrDefault();
 
-            this.demoDBContext.Students.Add(student);
+            demoDBContext.Students.Add(student);
 
             // this.demoDBContext.Entry(existingRecord).CurrentValues.SetValues(student);
 
-            this.demoDBContext.SaveChanges();
+            demoDBContext.SaveChanges();
 
             return student.Id;
         }
@@ -65,17 +65,19 @@ namespace WebAPI_DotNetMVC.Controllers
         // POST api/values
         public void Post([FromBody] string value)
         {
-
+            // Method intentionally left empty.
         }
 
         // PUT api/values/5
         public void Put(int id, [FromBody] string value)
         {
+            // Method intentionally left empty.
         }
 
         // DELETE api/values/5
         public void Delete(int id)
         {
+            // Method intentionally left empty.
         }
     }
 }

@@ -15,8 +15,8 @@ namespace WebAPI_DotNetMVC.Filters
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
-            var request = context.Request;
-            var authorization = request.Headers.Authorization;
+            System.Net.Http.HttpRequestMessage request = context.Request;
+            System.Net.Http.Headers.AuthenticationHeaderValue authorization = request.Headers.Authorization;
 
             if (authorization == null || authorization.Scheme != "Bearer")
                 return;
@@ -27,8 +27,8 @@ namespace WebAPI_DotNetMVC.Filters
             //    return;
             //}
 
-            var token = authorization.Parameter;
-            var principal = await AuthenticateJwtToken(token);
+            string token = authorization.Parameter;
+            IPrincipal principal = await AuthenticateJwtToken(token);
             if (principal == null) return;
 
             //if (principal == null)
@@ -40,43 +40,28 @@ namespace WebAPI_DotNetMVC.Filters
 
         public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
         {
-            Challenge(context);
+            // Challenge(context);
             return Task.FromResult(0);
-        }
-
-        private void Challenge(HttpAuthenticationChallengeContext context)
-        {
-            string parameter = null;
-
-            if (!string.IsNullOrEmpty(Realm))
-                parameter = "realm=\"" + Realm + "\"";
-
-            //context.ChallengeWith("Bearer", parameter);
         }
 
         private static bool ValidateToken(string token, out string username)
         {
-            try
-            {
-
-            }
-            catch (Exception)
-            {
-                ///asdasdasd
-                throw;
-            }
-            username = null;
-
-            var simplePrinciple = TokenManager.GetPrincipal(token);
-            var identity = simplePrinciple?.Identity as ClaimsIdentity;
+            ClaimsPrincipal simplePrinciple = TokenManager.GetPrincipal(token);
+            ClaimsIdentity identity = simplePrinciple?.Identity as ClaimsIdentity;
 
             if (identity == null)
+            {
+                username = null;
                 return false;
+            }
 
             if (!identity.IsAuthenticated)
+            {
+                username = null;
                 return false;
+            }
 
-            var usernameClaim = identity.FindFirst(ClaimTypes.GivenName);
+            Claim usernameClaim = identity.FindFirst(ClaimTypes.Name);
             username = usernameClaim?.Value;
 
             if (string.IsNullOrEmpty(username))
@@ -89,16 +74,16 @@ namespace WebAPI_DotNetMVC.Filters
 
         protected Task<IPrincipal> AuthenticateJwtToken(string token)
         {
-            if (ValidateToken(token, out var username))
+            if (ValidateToken(token, out string username))
             {
                 // based on username to get more information from database in order to build local identity
-                var claims = new List<Claim>
+                List<Claim> claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.GivenName, username)
+                    new Claim(ClaimTypes.Name, username)
                     // Add more claims if needed: Roles, ...
                 };
 
-                var identity = new ClaimsIdentity(claims, "Jwt");
+                ClaimsIdentity identity = new ClaimsIdentity(claims, "Jwt");
                 IPrincipal user = new ClaimsPrincipal(identity);
 
                 return Task.FromResult(user);
